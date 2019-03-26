@@ -42,12 +42,16 @@
         </button>
       </div>
       <ul>
-        <li
-          v-for="(item) in sortedItems"
-          :class="{strikeout: item.completed, priority: item.highPriority}"
-          @click="toggleCompleted(item)"
-        >
-          {{ item.label }}
+        <li v-for="(item) in sortedItems">
+          <button class="btn btn-util" @click="toggleStatus(item, 'priority')">
+            {{ item.priority ? "&times;" : "P" }}
+          </button>
+          <p
+            :class="{strikeout: item.completed, priority: item.priority}"
+            @click="toggleStatus(item, 'completed')"
+          >
+            {{ item.label }} - {{ formatDate(item.createdAt) }}
+          </p>
         </li>
       </ul>
       <p v-if="items.length === 0">You've got nothing 2Do!</p>

@@ -59,6 +59,10 @@ li:hover {
   color: #22292f;
 }
 
+li p {
+  margin: 0;
+}
+
 li input {
   margin: 0 0.5rem 0;
 }
@@ -124,6 +128,16 @@ li input {
 
 .btn-primary:hover {
   background: #3490dc;
+}
+
+.btn-util {
+  border-radius: 100%;
+  background: rgb(255, 245, 232);
+  margin: 5px 10px 5px 5px;
+}
+
+.btn-util:hover {
+  background: rgb(255, 239, 214);
 }
 
 .btn-cancel {
