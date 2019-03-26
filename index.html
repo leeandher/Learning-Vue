@@ -39,16 +39,16 @@
       </div>
       <ul>
         <li
-          v-for="({completed, highPriority, label}) in sortedItems"
-          :class="{strikeout: completed, priority: highPriority}"
-          @click="toggleCompleted(completed)"
+          v-for="(item) in sortedItems"
+          :class="{strikeout: item.completed, priority: item.highPriority}"
+          @click="toggleCompleted(item)"
         >
-          {{ label }}
+          {{ item.label }}
         </li>
       </ul>
       <p v-if="items.length === 0">You've got nothing 2Do!</p>
       <br />
-      <small><i>2Do</i> sorts by priority, then newest to oldest</small>
+      <small><i>Got2Do</i> sorts by priority, then newest to oldest</small>
     </div>
 
     <script src="https://unpkg.com/vue"></script>

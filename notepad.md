@@ -23,3 +23,5 @@ Array class syntax
 - default classes can be added as default elements of ar as a seperate property
 
 computed properties
+
+//todo add a button to make it priority
