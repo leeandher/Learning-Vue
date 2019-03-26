@@ -2,22 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Complex Data</title>
+    <title>Got2Do</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="shopping-list">
-      <h1>{{ header }}</h1>
+    <div id="root">
+      <div class="header">
+        <h1>{{ header }}</h1>
+        <button
+          v-if="state === 'default'"
+          class="btn btn-primary"
+          @click="changeState('edit')"
+        >
+          2Do?
+        </button>
+        <button v-else class="btn btn-cancel" @click="changeState('default')">
+          2Done!
+        </button>
+      </div>
+      <div class="add-item-form" v-if="state === 'edit'">
+        <input
+          type="text"
+          v-model="newItem"
+          placeholder="Whatcha got 2 do?"
+          @keyup.enter="addItem"
+          maxlength="140"
+        />
+        <p>{{ characterCount }}/140</p>
+        <button
+          class="btn btn-primary"
+          @click="addItem"
+          :disabled="newItem.length === 0"
+        >
+          Add 2Do
+        </button>
+      </div>
+      <ul>
+        <li
+          v-for="({completed, highPriority, label}) in sortedItems"
+          :class="{strikeout: completed, priority: highPriority}"
+          @click="toggleCompleted(completed)"
+        >
+          {{ label }}
+        </li>
+      </ul>
+      <p v-if="items.length === 0">You've got nothing 2Do!</p>
+      <br />
+      <small><i>2Do</i> sorts by priority, then newest to oldest</small>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
-    <script>
-      const cardList = new Vue({
-        el: "#shopping-list",
-        data: {
-          header: "Complex Data Validation",
-        },
-      })
-    </script>
+    <script src="./Got2Do.js"></script>
   </body>
 </html>
