@@ -52,7 +52,7 @@ Here's an example:
   <script src="https://unpkg.com/vue"></script>
   <script>
     new Vue({
-      el: '#root'
+      el: "#root",
     })
   </script>
 </html>
@@ -78,8 +78,8 @@ For example, if we use the **v-model** directive on an `<input>` tag, we can ena
 <script>
   new Vue({
     data: {
-      someCoolProperty: 'default!'
-    }
+      someCoolProperty: "default!",
+    },
   })
 </script>
 ```
@@ -90,9 +90,69 @@ In the DOM, we'll see a title of `The value is default!`, with an input filled o
 
 ## Methods
 
+The `methods` property is pretty self-explanatory. You pass it an object containing any of the functions you need your application to have access to. These can be accessed the same way that data is, through the `{{}}` syntax, or via directives. Take a look at the following example:
+
+```html
+<p>{{ item.label }} - Due: {{ formatDate(item.createdAt) }}</p>
+<script>
+  new Vue({
+    data: {
+      item: {
+        label: "Astronomy Test",
+        createdAt: new Date(2012, 01, 15),
+      },
+    },
+    methods: {
+      formatDate: function(date) {
+        return `${months[date.getMonth()]} ${date.getDate()}`
+      },
+    },
+  })
+</script>
+```
+
+This code would produce the following in a `<p>` tag:
+
+```
+Astronomy Test - Due: January 15
+```
+
+This is extremely useful for little things you want your application to do, almost like helper functions. Obviously though, as your needs get more and more complicated, you're probably going to want to offload them into separate files, but they are still just as simple to access them in your explanation.
+
+There is one important thing you should note before using methods for everything. These will update for every re-render. If you have something thats relatively static, you should probably use _computed_ properties.
+
 ---
 
 ## Computed
+
+Computed properties are pretty special, they compute data that your application can use. The one requirement is that all of your computed property functions must return a value, that way Vue knows what should be rendered on our page. Here's an example of a computed property:
+
+```js
+new Vue({
+  // ...el, data, methods
+  computed: {
+    characterCount() {
+      return this.newItem.length
+    },
+    sortedItems() {
+      const sortedItems = []
+      const priorityItems = []
+      this.items
+        .sort((a, b) => a.createdAt - b.createdAt)
+        .forEach(item => {
+          if (item.priority) {
+            priorityItems.unshift(item)
+          } else {
+            sortedItems.unshift(item)
+          }
+        })
+      return [...priorityItems, ...sortedItems]
+    },
+  },
+})
+```
+
+These functions can be accessed in our application similar to how we access methods. You may be wondering how this is different from a normal `method` value. We can use methods for anything, like performing operations and state changes that might not actually return data, but computed values are meant for this. Additionally, they also have some impressive stuff going on under the hood. They're cached depending on their _reactive dependencies_ (the properties it uses). If the property they depend on cannot, or does not change, these will remain performant, and won't update. Remember, methods will re-run for every render of our application.
 
 ---
 
