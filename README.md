@@ -5,7 +5,7 @@ This repository contains a bunch of the small projects I've worked on while tryi
 - **Got2DO (Mar 26, 2019)** - [tutorial](https://vueschool.io/courses/vuejs-fundamentals)
   - A to-do application created as an introduction to Vue, all loaded into a simple webpage
   - You can add, prioritize, complete, and save the items on your to-do list
-  - After-course features
+  - After-course features:
     - priorities
     - date-time sorting
     - a character count maximum
