@@ -158,14 +158,34 @@ These functions can be accessed in our application similar to how we access meth
 
 ## Directives
 
+Now that you have a general feel about the structure of the Vue Instance, we can dive into some more specifics. Directives. The little instruction attributes that we can attach to our DOM to Vue-ify them. You have the loop directive; `v-for`, or the conditionals: `v-if` and `v-else`. These guys come in all different shapes and sizes, but I'm not going to go into all those specifics. Instead, I'm going to give a sort of higher-level overview of how they work,
+
 v-for: loops
 v-bind: events
 
 ### Event Handling
 
-every js event is handled (hover click, etc)
+There are plenty of situations in which we're going to want to listen for events happening on our DOM. With Vanilla JS, or jQuery the binding and unbinding would ve way more difficult than necessary, but luckily, we can make Vue do our event handling. The special`v-on` directive has access to all the DOM events we know and love, and lets us access our Vue instance through them! We can use `methods` to run function, or retrieve `computed` values or create logs. Check out the syntax below:
+
+```html
+<button v-on="loveVue">Click Me!</button>
+<script>
+  new Vue({
+    methods: {
+      loveVue: function(e) {
+        console.log(e) // Log the event
+        alert('Hello! -from Vue)
+      },
+    },
+  })
+</script>
+```
+
+Clicking out button will prompt the alert, and it barely took a line of code outside of our Vue Instance! This works with any and all of your standardized DOM events (ex. hover, submit, etc.).
 
 ### Class Syntax
+
+Often times you're going to want to infer some styling via your data, Your data controls the flow of your application, so it also makes sense that it would determine how it looks as well. Thankfully, Vue comes in clutch again, with the class syntax, and `v-bind` directive. You can think of this directive as saying, "X element needs access to Y data.
 
 object class syntax
 
