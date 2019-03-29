@@ -185,25 +185,43 @@ Clicking out button will prompt the alert, and it barely took a line of code out
 
 ### Class Syntax
 
-Often times you're going to want to infer some styling via your data, Your data controls the flow of your application, so it also makes sense that it would determine how it looks as well. Thankfully, Vue comes in clutch again, with the class syntax, and `v-bind` directive. You can think of this directive as saying, "X element needs access to Y data.
+Often times you're going to want to infer some styling via your data, Your data controls the flow of your application, so it also makes sense that it would determine how it looks as well. Thankfully, Vue comes in clutch again, with **the class syntax**, and `v-bind` directive. You can think of this directive as saying, "X element needs access to Y data. Once bound, any child or descendant of this element will also have access to this data, for use in double moustaches, or other directives.
 
-object class syntax
+Using the `v-bind` directive, we can attach conditionals onto the typical `class` attribute which will compute in our application. Per convention, there's two ways of doing so:
 
-`:class="{strikeout: item.completed}"`
+- Object Class syntax
 
-- obj prop is the name of the class to toggle
-- value is conditional connected to
+  - this way is considered the faster and simpler of the two
+  - typically only used for quick/small class names
+  - sort of easier to read if prettified
+  - not good for direct conditionals
+  - ex:
 
-Array class syntax
+```html
+<p v-bind:class="{strikeout: item.completed, default: true}">{{item.text}}</p>
+```
 
-`:class="[item.completed ? 'strikeout' : '']`
+- Array Class syntax
+  - More verbose of the two methods
+  - can get messy quickly
+  - provides a simple conditional
+  - easier to understand if non-conditional
+  - ex:
 
-- ternary based on conditional
-- default classes can be added as default elements of ar as a seperate property
+```html
+<p v-bind:class="[item.completed ? 'strikeout' : '', 'default']">
+  {{item.text}}
+</p>
+```
 
 ### Shorthand
 
-@ = v-on
-: = v-bind
+The two directives we've just talked about are very common in Vue applications. For that reason, they've been given a simple shorthand o that you don't need to write `v-on` or `v-bind` every time you wish to use one of them. Here it is:
+
+
+| Directive | Shorthand | Example                 |
+| --------- | :-------: | ----------------------- |
+| v-on      |     @     | @click, @hover, @submit |
+| v-bind    |     :     | :href, :name, :class    |
 
 ---
