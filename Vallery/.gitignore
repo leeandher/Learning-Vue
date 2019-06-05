@@ -1,0 +1,6 @@
+# Vue
+.cache/
+dist/
+
+# JS
+node_modules/
