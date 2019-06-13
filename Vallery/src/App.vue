@@ -1,14 +1,20 @@
 
 <template>
-  <div class="app-wrap">
+  <div class="app-wrapper">
     <h1 class="page-title">{{pageTitle}}</h1>
+    <Panel/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import Panel from "./components/Panel.vue";
 
 export default Vue.extend({
+  name: "app",
+  components: {
+    Panel
+  },
   data: function() {
     return {
       pageTitle: "IT Works!"
