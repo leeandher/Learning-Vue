@@ -52,7 +52,7 @@ Here's an example:
   <script src="https://unpkg.com/vue"></script>
   <script>
     new Vue({
-      el: '#root'
+      el: "#root",
     })
   </script>
 </html>
@@ -78,8 +78,8 @@ For example, if we use the **v-model** directive on an `<input>` tag, we can ena
 <script>
   new Vue({
     data: {
-      someCoolProperty: 'default!'
-    }
+      someCoolProperty: "default!",
+    },
   })
 </script>
 ```
@@ -90,40 +90,138 @@ In the DOM, we'll see a title of `The value is default!`, with an input filled o
 
 ## Methods
 
+The `methods` property is pretty self-explanatory. You pass it an object containing any of the functions you need your application to have access to. These can be accessed the same way that data is, through the `{{}}` syntax, or via directives. Take a look at the following example:
+
+```html
+<p>{{ item.label }} - Due: {{ formatDate(item.createdAt) }}</p>
+<script>
+  new Vue({
+    data: {
+      item: {
+        label: "Astronomy Test",
+        createdAt: new Date(2012, 01, 15),
+      },
+    },
+    methods: {
+      formatDate: function(date) {
+        return `${months[date.getMonth()]} ${date.getDate()}`
+      },
+    },
+  })
+</script>
+```
+
+This code would produce the following in a `<p>` tag:
+
+```
+Astronomy Test - Due: January 15
+```
+
+This is extremely useful for little things you want your application to do, almost like helper functions. Obviously though, as your needs get more and more complicated, you're probably going to want to offload them into separate files, but they are still just as simple to access them in your explanation.
+
+There is one important thing you should note before using methods for everything. These will update for every re-render. If you have something thats relatively static, you should probably use _computed_ properties.
+
 ---
 
 ## Computed
 
+Computed properties are pretty special, they compute data that your application can use. The one requirement is that all of your computed property functions must return a value, that way Vue knows what should be rendered on our page. Here's an example of a computed property:
+
+```js
+new Vue({
+  // ...el, data, methods
+  computed: {
+    characterCount() {
+      return this.newItem.length
+    },
+    sortedItems() {
+      const sortedItems = []
+      const priorityItems = []
+      this.items
+        .sort((a, b) => a.createdAt - b.createdAt)
+        .forEach(item => {
+          if (item.priority) {
+            priorityItems.unshift(item)
+          } else {
+            sortedItems.unshift(item)
+          }
+        })
+      return [...priorityItems, ...sortedItems]
+    },
+  },
+})
+```
+
+These functions can be accessed in our application similar to how we access methods. You may be wondering how this is different from a normal `method` value. We can use methods for anything, like performing operations and state changes that might not actually return data, but computed values are meant for this. Additionally, they also have some impressive stuff going on under the hood. They're cached depending on their _reactive dependencies_ (the properties it uses). If the property they depend on cannot, or does not change, these will remain performant, and won't update. Remember, methods will re-run for every render of our application.
+
 ---
 
 ## Directives
+
+Now that you have a general feel about the structure of the Vue Instance, we can dive into some more specifics. Directives. The little instruction attributes that we can attach to our DOM to Vue-ify them. You have the loop directive; `v-for`, or the conditionals: `v-if` and `v-else`. These guys come in all different shapes and sizes, but I'm not going to go into all those specifics. Instead, I'm going to give a sort of higher-level overview of how they work,
 
 v-for: loops
 v-bind: events
 
 ### Event Handling
 
-every js event is handled (hover click, etc)
+There are plenty of situations in which we're going to want to listen for events happening on our DOM. With Vanilla JS, or jQuery the binding and unbinding would ve way more difficult than necessary, but luckily, we can make Vue do our event handling. The special`v-on` directive has access to all the DOM events we know and love, and lets us access our Vue instance through them! We can use `methods` to run function, or retrieve `computed` values or create logs. Check out the syntax below:
+
+```html
+<button v-on="loveVue">Click Me!</button>
+<script>
+  new Vue({
+    methods: {
+      loveVue: function(e) {
+        console.log(e) // Log the event
+        alert('Hello! -from Vue)
+      },
+    },
+  })
+</script>
+```
+
+Clicking out button will prompt the alert, and it barely took a line of code outside of our Vue Instance! This works with any and all of your standardized DOM events (ex. hover, submit, etc.).
 
 ### Class Syntax
 
-object class syntax
+Often times you're going to want to infer some styling via your data, Your data controls the flow of your application, so it also makes sense that it would determine how it looks as well. Thankfully, Vue comes in clutch again, with **the class syntax**, and `v-bind` directive. You can think of this directive as saying, "X element needs access to Y data. Once bound, any child or descendant of this element will also have access to this data, for use in double moustaches, or other directives.
 
-`:class="{strikeout: item.completed}"`
+Using the `v-bind` directive, we can attach conditionals onto the typical `class` attribute which will compute in our application. Per convention, there's two ways of doing so:
 
-- obj prop is the name of the class to toggle
-- value is conditional connected to
+- Object Class syntax
 
-Array class syntax
+  - this way is considered the faster and simpler of the two
+  - typically only used for quick/small class names
+  - sort of easier to read if prettified
+  - not good for direct conditionals
+  - ex:
 
-`:class="[item.completed ? 'strikeout' : '']`
+```html
+<p v-bind:class="{strikeout: item.completed, default: true}">{{item.text}}</p>
+```
 
-- ternary based on conditional
-- default classes can be added as default elements of ar as a seperate property
+- Array Class syntax
+  - More verbose of the two methods
+  - can get messy quickly
+  - provides a simple conditional
+  - easier to understand if non-conditional
+  - ex:
+
+```html
+<p v-bind:class="[item.completed ? 'strikeout' : '', 'default']">
+  {{item.text}}
+</p>
+```
 
 ### Shorthand
 
-@ = v-on
-: = v-bind
+The two directives we've just talked about are very common in Vue applications. For that reason, they've been given a simple shorthand o that you don't need to write `v-on` or `v-bind` every time you wish to use one of them. Here it is:
+
+
+| Directive | Shorthand | Example                 |
+| --------- | :-------: | ----------------------- |
+| v-on      |     @     | @click, @hover, @submit |
+| v-bind    |     :     | :href, :name, :class    |
 
 ---
