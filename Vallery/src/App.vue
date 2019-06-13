@@ -1,19 +1,30 @@
 
 <template>
   <div class="app-wrapper">
-    <h1 class="page-title">{{pageTitle}}</h1>
-    <Panel/>
+    <Header></Header>
+    <Panel></Panel>
+    <Showcase></Showcase>
+    <Modal/>
+    <Footer/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 import Panel from "./components/Panel.vue";
+import Modal from "./components/Modal.vue";
+import Showcase from "./components/Showcase.vue";
 
 export default Vue.extend({
   name: "app",
   components: {
-    Panel
+    Header,
+    Footer,
+    Panel,
+    Modal,
+    Showcase
   },
   data: function() {
     return {

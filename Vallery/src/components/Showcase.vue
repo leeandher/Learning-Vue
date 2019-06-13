@@ -1,7 +1,5 @@
 <template>
-  <div class="showcase-wrapper">
-    <h2>Showcase</h2>
-  </div>
+  <div class="showcase-wrapper">Showcase</div>
 </template>
 
 <script lang="ts">
@@ -14,7 +12,8 @@ export default Vue.extend({
 
 <style lang="scss">
 .showcase-wrapper {
-  border: 2px solid limegreen;
+  background: yellow;
+  font-size: 1.75rem;
 }
 </style>
 

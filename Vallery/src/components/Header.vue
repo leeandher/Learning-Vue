@@ -1,18 +1,18 @@
 <template>
-  <div class="panel-wrapper">Panel</div>
+  <div class="header-wrapper">Header</div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "Panel"
+  name: "Header"
 });
 </script>
 
 
 <style lang="scss">
-.panel-wrapper {
-  background: orange;
+.header-wrapper {
+  background: red;
   font-size: 1.75rem;
 }
 </style>

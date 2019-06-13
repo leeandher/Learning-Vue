@@ -1,7 +1,5 @@
 <template>
-  <div class="modal-wrapper">
-    <h2>Modal</h2>
-  </div>
+  <div class="modal-wrapper">Modal</div>
 </template>
 
 <script lang="ts">
@@ -14,7 +12,8 @@ export default Vue.extend({
 
 <style lang="scss">
 .modal-wrapper {
-  border: 2px solid goldenrod;
+  background: limegreen;
+  font-size: 1.75rem;
 }
 </style>
 

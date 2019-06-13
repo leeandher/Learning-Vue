@@ -1,18 +1,18 @@
 <template>
-  <div class="panel-wrapper">Panel</div>
+  <div class="footer-wrapper">Footer</div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "Panel"
+  name: "Footer"
 });
 </script>
 
 
 <style lang="scss">
-.panel-wrapper {
-  background: orange;
+.footer-wrapper {
+  background: aqua;
   font-size: 1.75rem;
 }
 </style>
