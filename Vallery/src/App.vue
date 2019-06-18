@@ -1,9 +1,9 @@
 
 <template>
   <div class="app-wrapper">
-    <Header></Header>
-    <Panel></Panel>
-    <Showcase></Showcase>
+    <Header/>
+    <Panel/>
+    <Showcase/>
     <Modal/>
     <Footer/>
   </div>
