@@ -5,7 +5,7 @@
     <Panel/>
     <Showcase/>
     <Modal/>
-    <Footer/>
+    <Footer :config="config"/>
   </div>
 </template>
 
@@ -16,6 +16,8 @@ import Footer from "./components/Footer.vue";
 import Panel from "./components/Panel.vue";
 import Modal from "./components/Modal.vue";
 import Showcase from "./components/Showcase.vue";
+
+import dataset from "./data/sampleset.json";
 
 export default Vue.extend({
   name: "app",
@@ -28,7 +30,7 @@ export default Vue.extend({
   },
   data: function() {
     return {
-      pageTitle: "IT Works!"
+      config: dataset.config
     };
   }
 });
