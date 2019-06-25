@@ -1,1 +1,10 @@
-{}
+{
+  "config": {
+    "mainText": "#000000",
+    "altText": "#FFFFFF",
+    "darkAccent": "#a62e51",
+    "accent": "#e43f6f",
+    "lightAccent": "#f096b0",
+    "altAccent": "#ff7f51"
+  }
+}
