@@ -160,8 +160,52 @@ These functions can be accessed in our application similar to how we access meth
 
 Now that you have a general feel about the structure of the Vue Instance, we can dive into some more specifics. Directives. The little instruction attributes that we can attach to our DOM to Vue-ify them. You have the loop directive; `v-for`, or the conditionals: `v-if` and `v-else`. These guys come in all different shapes and sizes, but I'm not going to go into all those specifics. Instead, I'm going to give a sort of higher-level overview of how they work,
 
-v-for: loops
-v-bind: events
+**v-for**
+
+`v-for` is a directive designed for creating loops or list rendered items. A simple approach for implementation would be the following with HTML5 components:
+```html
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
+```
+
+If your implementation uses components, and destructuring it might look like this:
+```html
+<template>
+<div class="wrapper">
+  <div class="for-wrap" v-for="({title, description, image}, index) in items" :key="index">
+    <Item :title="title" :description="description" :image="image" />
+  </div>
+</div>
+</template>
+```
+
+**v-bind**
+
+`v-bind` is the directive to attack attributes from the Vue instance to the actual DOM elements. It can actually be seen using the shorthand above where `v-bind:attr` is the same as `:attr`:
+
+An example component would look like:
+```html
+<template>
+  <a v-bind:href="link">{{linkText}}</a>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  name: "Link",
+  data: function(): object {
+    return {
+      link: "https://github.com/leeandher",
+      linkText: "Github Link!"
+    };
+  },
+});
+</script>
+```
+
 
 ### Event Handling
 
