@@ -2,7 +2,7 @@
 <template>
   <div class="app-wrapper" :style="style">
     <Header :config="config" pageTitle="freeCodeCamp"/>
-    <Panel :config="config"/>
+    <Panel :config="config" :items="items"/>
     <Showcase :config="config"/>
     <Modal :config="config"/>
     <Footer :config="config"/>
@@ -28,13 +28,13 @@ export default Vue.extend({
     Modal,
     Showcase
   },
-  data: function() {
+  data: function(): object {
     return {
-      config: dataset.config
+      ...dataset
     };
   },
   computed: {
-    style() {
+    style(): string {
       const {
         config: { fontFamily }
       } = dataset;

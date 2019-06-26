@@ -28,9 +28,11 @@
 import Vue from "vue";
 export default Vue.extend({
   name: "Footer",
-  props: ["config"],
+  props: {
+    config: Object
+  },
   computed: {
-    style() {
+    style(): string {
       const {
         mainText,
         altText,
