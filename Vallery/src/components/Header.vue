@@ -1,13 +1,33 @@
 <template>
-  <div class="header-wrapper">
-    <h1>This is the title</h1>
+  <div class="header-wrapper" :style="style">
+    <h1>{{pageTitle}}</h1>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "Header"
+  name: "Header",
+  props: {
+    pageTitle: String,
+    config: Object
+  },
+  computed: {
+    style() {
+      const {
+        mainText,
+        altText,
+        darkAccent,
+        accent,
+        lightAccent,
+        altAccent
+      } = this.config;
+      return `
+        background-color: ${accent};
+        color: ${mainText};
+      `;
+    }
+  }
 });
 </script>
 

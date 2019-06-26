@@ -1,10 +1,10 @@
 
 <template>
-  <div class="app-wrapper">
-    <Header/>
-    <Panel/>
-    <Showcase/>
-    <Modal/>
+  <div class="app-wrapper" :style="style">
+    <Header :config="config" pageTitle="freeCodeCamp"/>
+    <Panel :config="config"/>
+    <Showcase :config="config"/>
+    <Modal :config="config"/>
     <Footer :config="config"/>
   </div>
 </template>
@@ -32,6 +32,16 @@ export default Vue.extend({
     return {
       config: dataset.config
     };
+  },
+  computed: {
+    style() {
+      const {
+        config: { fontFamily }
+      } = dataset;
+      return `
+        font-family: ${fontFamily}
+      `;
+    }
   }
 });
 </script>
