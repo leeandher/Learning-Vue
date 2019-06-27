@@ -1,5 +1,5 @@
 <template>
-  <div class="mini-grid-wrapper">
+  <div class="mini-grid-wrapper" @click="selectItem(index)">
     <h4>{{title}}</h4>
     <p>{{description}}</p>
     <img :src="image" :alt="title">
@@ -15,7 +15,15 @@ export default Vue.extend({
     title: String,
     image: String,
     description: String,
-    link: String
+    link: String,
+    index: Number,
+    selectItem: Function
+  },
+  methods: {
+    test(i) {
+      console.log(i);
+      this.selectItem(i);
+    }
   }
 });
 </script>

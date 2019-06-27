@@ -2,8 +2,8 @@
 <template>
   <div class="app-wrapper" :style="style">
     <Header :config="config" pageTitle="freeCodeCamp"/>
-    <Panel :config="config" :items="items"/>
-    <Showcase :config="config"/>
+    <Panel :config="config" :items="items" :selectItem="selectItem"/>
+    <Showcase :config="config" :selectedItem="selectedItem"/>
     <Modal :config="config"/>
     <Footer :config="config"/>
   </div>
@@ -30,6 +30,7 @@ export default Vue.extend({
   },
   data: function(): object {
     return {
+      selectedItem: dataset.items[0],
       ...dataset
     };
   },
@@ -41,6 +42,11 @@ export default Vue.extend({
       return `
         font-family: ${fontFamily}
       `;
+    }
+  },
+  methods: {
+    selectItem: async function(index): Promise<void> {
+      this.selectedItem = this.items[index];
     }
   }
 });
